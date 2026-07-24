@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tatakuzu — Binairo Puzzle</title>
+<meta name="description" content="Tatakuzu, un puzzle de logique binaire (Binairo / Takuzu). Remplis la grille : noir ou blanc. Jouable hors-ligne.">
+<meta property="og:title" content="Tatakuzu — Binairo Puzzle">
+<meta property="og:description" content="Remplis la grille : noir ou blanc ! Puzzle de logique Binairo, jouable hors-ligne.">
+<meta property="og:image" content="https://play-lh.googleusercontent.com/0U9oDjVlwLauHhafy4q8-vzQQhNvDPKqPOfrixPCAJF0Ufylbou6CpvUhah1H16WUOY5QZT3llNzVhD-hf7Bj1A=w512">
+<meta property="og:type" content="website">
+<link rel="icon" href="https://play-lh.googleusercontent.com/0U9oDjVlwLauHhafy4q8-vzQQhNvDPKqPOfrixPCAJF0Ufylbou6CpvUhah1H16WUOY5QZT3llNzVhD-hf7Bj1A=w96">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F4F1E8;
+    --cream-deep:#EBE7D9;
+    --night:#3A3A4A;
+    --night-soft:#5A5A6C;
+    --gold:#C6A15B;
+    --gold-deep:#A9873F;
+    --white-marble:#FBFAF5;
+    --line:rgba(58,58,74,.12);
+    --shadow:0 8px 30px rgba(58,58,74,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--cream);
+    color:var(--night);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+
+  /* ---- Hero ---- */
+  header.hero{
+    padding:72px 0 56px;
+    text-align:center;
+    background:
+      radial-gradient(1200px 400px at 50% -10%, rgba(198,161,91,.10), transparent 70%);
+  }
+  .app-icon{
+    width:104px;height:104px;border-radius:24px;
+    box-shadow:var(--shadow);
+    display:block;margin:0 auto 24px;
+  }
+  .eyebrow{
+    font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:600;margin-bottom:14px;
+  }
+  h1{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:600;
+    font-size:clamp(2.4rem,6vw,3.9rem);
+    line-height:1.05;
+    letter-spacing:-.01em;
+  }
+  h1 .accent{color:var(--gold-deep)}
+  .tagline{
+    font-size:clamp(1.05rem,2.4vw,1.3rem);
+    color:var(--night-soft);
+    max-width:34ch;margin:18px auto 0;
+  }
+
+  /* ---- Signature: mini grille binairo ---- */
+  .grid-motif{
+    display:grid;grid-template-columns:repeat(6,1fr);gap:10px;
+    width:min(300px,72vw);margin:40px auto 8px;
+    padding:16px;background:var(--white-marble);
+    border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
+  }
+  .cell{aspect-ratio:1;border-radius:50%}
+  .cell.b{background:var(--night)}
+  .cell.w{background:var(--cream);border:1.5px solid var(--line)}
+  .cell.e{background:transparent;border:1.5px dashed rgba(58,58,74,.18)}
+
+  .cta-row{margin-top:34px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 26px;border-radius:999px;font-weight:600;font-size:1rem;
+    text-decoration:none;transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{background:var(--night);color:var(--cream);box-shadow:var(--shadow)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(58,58,74,.22)}
+  .btn-ghost{border:1.5px solid var(--line);color:var(--night)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-deep)}
+
+  /* ---- Features ---- */
+  section{padding:64px 0}
+  .section-title{
+    font-family:'Fraunces',serif;font-weight:500;
+    font-size:clamp(1.6rem,3.4vw,2.2rem);text-align:center;margin-bottom:8px;
+  }
+  .section-sub{text-align:center;color:var(--night-soft);margin-bottom:44px}
+  .features{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;
+  }
+  .feature{
+    background:var(--white-marble);border:1px solid var(--line);
+    border-radius:18px;padding:26px 24px;
+  }
+  .feature .mark{
+    width:34px;height:34px;border-radius:9px;background:var(--cream-deep);
+    display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+    color:var(--gold-deep);font-family:'Fraunces',serif;font-weight:600;
+  }
+  .feature h3{font-size:1.05rem;font-weight:600;margin-bottom:4px}
+  .feature p{color:var(--night-soft);font-size:.95rem}
+
+  /* ---- Screenshots ---- */
+  .shots-scroll{
+    display:flex;gap:16px;overflow-x:auto;padding:8px 24px 22px;
+    scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+  }
+  .shots-scroll img{
+    height:440px;border-radius:20px;flex:0 0 auto;
+    scroll-snap-align:center;box-shadow:var(--shadow);
+    border:1px solid var(--line);background:var(--white-marble);
+  }
+  .shots-scroll::-webkit-scrollbar{height:8px}
+  .shots-scroll::-webkit-scrollbar-thumb{background:var(--line);border-radius:99px}
+
+  /* ---- About / aliases ---- */
+  .about{max-width:64ch;margin:0 auto;text-align:center;color:var(--night-soft);font-size:1.05rem}
+  .aliases{margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+  .chip{
+    font-size:.85rem;padding:6px 14px;border-radius:999px;
+    background:var(--cream-deep);color:var(--night);border:1px solid var(--line);
+  }
+
+  /* ---- Footer ---- */
+  footer{
+    border-top:1px solid var(--line);padding:44px 0;text-align:center;
+    color:var(--night-soft);font-size:.92rem;
+  }
+  footer .links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+  footer a{text-decoration:none;font-weight:500;color:var(--night)}
+  footer a:hover{color:var(--gold-deep)}
+  footer .studio{font-family:'Fraunces',serif;font-size:1.05rem;color:var(--night)}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+    .btn:hover{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="app-icon" src="https://play-lh.googleusercontent.com/0U9oDjVlwLauHhafy4q8-vzQQhNvDPKqPOfrixPCAJF0Ufylbou6CpvUhah1H16WUOY5QZT3llNzVhD-hf7Bj1A=w208-h208" alt="Icône Tatakuzu">
+    <p class="eyebrow">Mukeka Studio</p>
+    <h1>Tatakuzu<br><span class="accent">Binairo Puzzle</span></h1>
+    <p class="tagline">Remplis la grille : noir ou blanc. Un puzzle de logique tout en déduction, jouable hors-ligne.</p>
+
+    <div class="grid-motif" aria-hidden="true">
+      <span class="cell b"></span><span class="cell w"></span><span class="cell w"></span><span class="cell b"></span><span class="cell e"></span><span class="cell w"></span>
+      <span class="cell w"></span><span class="cell b"></span><span class="cell e"></span><span class="cell w"></span><span class="cell b"></span><span class="cell b"></span>
+      <span class="cell w"></span><span class="cell b"></span><span class="cell b"></span><span class="cell w"></span><span class="cell b"></span><span class="cell w"></span>
+      <span class="cell b"></span><span class="cell w"></span><span class="cell w"></span><span class="cell b"></span><span class="cell e"></span><span class="cell b"></span>
+      <span class="cell b"></span><span class="cell e"></span><span class="cell b"></span><span class="cell w"></span><span class="cell w"></span><span class="cell b"></span>
+      <span class="cell w"></span><span class="cell b"></span><span class="cell w"></span><span class="cell b"></span><span class="cell w"></span><span class="cell w"></span>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.mukeka.tatakuzu">
+        Télécharger sur Google Play
+      </a>
+      <a class="btn btn-ghost" href="#apercu">Voir le jeu</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2 class="section-title reveal">Trois règles, des heures de déduction</h2>
+    <p class="section-sub reveal">Jamais trois symboles identiques côte à côte · autant de noirs que de blancs par ligne et colonne · pas deux lignes (ou colonnes) identiques.</p>
+    <div class="features">
+      <div class="feature reveal"><div class="mark">∞</div><h3>Des centaines de grilles</h3><p>Du Facile à l'Expert, avec une progression qui monte tranquillement en exigence.</p></div>
+      <div class="feature reveal"><div class="mark">▦</div><h3>Quatre tailles</h3><p>6×6, 8×8, 10×10 et 12×12 — de la pause éclair au vrai casse-tête.</p></div>
+      <div class="feature reveal"><div class="mark">⌁</div><h3>Jouable hors-ligne</h3><p>Aucune connexion requise. Idéal pour un trajet ou un moment au calme.</p></div>
+      <div class="feature reveal"><div class="mark">✓</div><h3>Une seule solution</h3><p>Chaque grille a une unique solution garantie. Pas de hasard, que de la logique.</p></div>
+      <div class="feature reveal"><div class="mark">?</div><h3>Indices</h3><p>Un coup de pouce quand tu bloques, sans jamais résoudre à ta place.</p></div>
+      <div class="feature reveal"><div class="mark">~</div><h3>Ambiance douce</h3><p>Une atmosphère apaisante pour se détendre et entraîner sa logique.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="apercu" style="padding-top:24px">
+  <div class="wrap">
+    <h2 class="section-title reveal">Aperçu</h2>
+    <p class="section-sub reveal">Fais défiler pour voir le jeu.</p>
+  </div>
+  <div class="shots-scroll reveal">
+    <img loading="lazy" src="https://play-lh.googleusercontent.com/i3Gwb-UTvzjKuoPPd9pXBUUbloGqbHrBi0Chch0juPLTdWwDH-E1Lc74gBWa8pkzfLaAl4CyR5tu6rXqUexV4A=w600" alt="Capture d'écran Tatakuzu">
+    <img loading="lazy" src="https://play-lh.googleusercontent.com/8JGSIOWOydvO7A8jyV-nOnActZoE9t0LZfoZCOBzgLRgv7qjSrAz3hfNBKN8Osf11-DrmULPRgaNyBzfD1wKfw=w600" alt="Capture d'écran Tatakuzu">
+    <img loading="lazy" src="https://play-lh.googleusercontent.com/sbFmCm7ApIaoXDMuqhxYmwqKVbTxW5_RyidtsDdEj7eoALJ7RnuozjfplCRLottv58jCnE36m82tRPNx0zA9Ig=w600" alt="Capture d'écran Tatakuzu">
+    <img loading="lazy" src="https://play-lh.googleusercontent.com/5Ayq4ooYA42pQbLp701a66PTcomqJl3RDe2WVWWgOQg87GC7DEg9SrFSRpR1pv4Fh8jgrqKMHjOpF8kHngRk=w600" alt="Capture d'écran Tatakuzu">
+    <img loading="lazy" src="https://play-lh.googleusercontent.com/SseZTYcT9DH606BmA5VMHExy8bWLMtz7btTPcpGZE2pumowdf9LhhLPU9rv8uWWKK93jPGwzOBTGZlIJqQO7KA=w600" alt="Capture d'écran Tatakuzu">
+    <img loading="lazy" src="https://play-lh.googleusercontent.com/TMyRrA1YCdizjXWYa9uMlU8r5TKVp_3TwJh6UYcCNB76hBqKZd68hL-TSPnv7tJn0IdS7Obbz7Z1OtWImgEk=w600" alt="Capture d'écran Tatakuzu">
+    <img loading="lazy" src="https://play-lh.googleusercontent.com/-9J6jnNQmcM2RIvA8ZuXxMutZaua3_Xv_LKdFLwGdPV9-4ZRv0xKE1IftcQtMvliPEXFNADXQCZT_099Swrh=w600" alt="Capture d'écran Tatakuzu">
+    <img loading="lazy" src="https://play-lh.googleusercontent.com/aDlwpui18q_O7_XC4bGXZ9Z1gLhFACB6hv6YVXT01dLXayzlL6JgwC-E4zI37AmgbnSYgBph_ClFvw_eygxdG2Y=w600" alt="Capture d'écran Tatakuzu">
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="about reveal">Le Binairo est un jeu de logique binaire connu sous bien des noms. Si tu aimes le Sudoku, le Nonogram ou les jeux de réflexion, tu devrais t'y sentir chez toi.</p>
+    <div class="aliases reveal">
+      <span class="chip">Binairo</span><span class="chip">Takuzu</span><span class="chip">Binoxxo</span><span class="chip">Unruly</span><span class="chip">Binary Puzzle</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="https://play.google.com/store/apps/details?id=com.mukeka.tatakuzu">Google Play</a>
+      <a href="https://oulanbator.github.io/com.mukeka.tatakuzu/">Confidentialité</a>
+      <a href="mailto:mukeka.studio@gmail.com">Support</a>
+    </div>
+    <p class="studio">Mukeka Studio</p>
+    <p>© 2026 Mukeka Studio · Fait avec soin.</p>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
