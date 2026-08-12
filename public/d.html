@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Un défi Tatakuzu t'attend</title>
+<meta name="description" content="Un ami t'a lancé un défi sur Tatakuzu. Installe le jeu, puis rouvre ce lien : la grille s'ouvrira directement dans l'app.">
+<meta property="og:title" content="Un défi Tatakuzu t'attend">
+<meta property="og:description" content="Un ami te défie sur la même grille de Binairo. À toi de jouer !">
+<meta property="og:image" content="https://play-lh.googleusercontent.com/0U9oDjVlwLauHhafy4q8-vzQQhNvDPKqPOfrixPCAJF0Ufylbou6CpvUhah1H16WUOY5QZT3llNzVhD-hf7Bj1A=w512">
+<meta property="og:type" content="website">
+<link rel="icon" href="https://play-lh.googleusercontent.com/0U9oDjVlwLauHhafy4q8-vzQQhNvDPKqPOfrixPCAJF0Ufylbou6CpvUhah1H16WUOY5QZT3llNzVhD-hf7Bj1A=w96">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Mêmes tokens que index.html — une seule identité visuelle sur le domaine. */
+  :root{
+    --cream:#F4F1E8;
+    --cream-deep:#EBE7D9;
+    --night:#3A3A4A;
+    --night-soft:#5A5A6C;
+    --gold:#C6A15B;
+    --gold-deep:#A9873F;
+    --white-marble:#FBFAF5;
+    --line:rgba(58,58,74,.12);
+    --shadow:0 8px 30px rgba(58,58,74,.10);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--cream);
+    color:var(--night);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+    display:flex;flex-direction:column;
+  }
+  a{color:inherit}
+  .wrap{max-width:640px;margin:0 auto;padding:0 24px;width:100%}
+
+  main{
+    flex:1;
+    padding:56px 0 40px;
+    text-align:center;
+    background:radial-gradient(1000px 380px at 50% -10%, rgba(198,161,91,.12), transparent 70%);
+  }
+  .app-icon{
+    width:96px;height:96px;border-radius:22px;
+    box-shadow:var(--shadow);
+    display:block;margin:0 auto 22px;
+  }
+  .eyebrow{
+    font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:600;margin-bottom:12px;
+  }
+  h1{
+    font-family:'Fraunces',Georgia,serif;
+    font-weight:600;
+    font-size:clamp(2rem,7vw,3rem);
+    line-height:1.08;
+    letter-spacing:-.01em;
+  }
+  h1 .accent{color:var(--gold-deep)}
+  .tagline{
+    font-size:clamp(1.02rem,2.6vw,1.18rem);
+    color:var(--night-soft);
+    max-width:36ch;margin:16px auto 0;
+  }
+
+  /* Deux billes qui s'affrontent — la métaphore du duel, sans image. */
+  .duel-motif{
+    display:flex;align-items:center;justify-content:center;gap:18px;
+    margin:34px auto 6px;
+    padding:20px 26px;background:var(--white-marble);
+    border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);
+    width:fit-content;
+  }
+  .marble{width:44px;height:44px;border-radius:50%}
+  .marble.b{background:var(--night)}
+  .marble.w{background:var(--cream);border:1.5px solid var(--line)}
+  .versus{
+    font-family:'Fraunces',serif;font-weight:600;font-size:1.1rem;
+    color:var(--gold-deep);letter-spacing:.08em;
+  }
+
+  .cta-row{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 26px;border-radius:999px;font-weight:600;font-size:1rem;
+    text-decoration:none;transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary{background:var(--night);color:var(--cream);box-shadow:var(--shadow)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(58,58,74,.22)}
+  .btn-ghost{border:1.5px solid var(--line);color:var(--night)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-deep)}
+
+  .card{
+    background:var(--white-marble);border:1px solid var(--line);
+    border-radius:18px;padding:22px 24px;margin-top:34px;text-align:left;
+  }
+  .card h2{
+    font-family:'Fraunces',serif;font-weight:500;font-size:1.12rem;
+    margin-bottom:10px;
+  }
+  .card p{color:var(--night-soft);font-size:.95rem}
+  .card p + p{margin-top:10px}
+  .steps{margin:10px 0 0 1.1rem;color:var(--night-soft);font-size:.95rem}
+  .steps li{margin-bottom:6px}
+
+  .note-en{
+    margin-top:26px;color:var(--night-soft);font-size:.88rem;
+    max-width:52ch;margin-left:auto;margin-right:auto;
+  }
+
+  .hidden{display:none}
+
+  footer{
+    border-top:1px solid var(--line);padding:32px 0;text-align:center;
+    color:var(--night-soft);font-size:.9rem;
+  }
+  footer .links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+  footer a{text-decoration:none;font-weight:500;color:var(--night)}
+  footer a:hover{color:var(--gold-deep)}
+  footer .studio{font-family:'Fraunces',serif;font-size:1rem;color:var(--night)}
+
+  @media (prefers-reduced-motion:reduce){
+    .btn:hover{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <div class="wrap">
+    <img class="app-icon" src="https://play-lh.googleusercontent.com/0U9oDjVlwLauHhafy4q8-vzQQhNvDPKqPOfrixPCAJF0Ufylbou6CpvUhah1H16WUOY5QZT3llNzVhD-hf7Bj1A=w208-h208" alt="Icône Tatakuzu">
+    <p class="eyebrow">Mukeka Studio</p>
+
+    <!-- Cas normal : le lien porte un défi (fragment présent). -->
+    <div id="with-challenge">
+      <h1>Un défi<br><span class="accent">t'attend</span></h1>
+      <p class="tagline">Un ami t'a lancé un duel sur Tatakuzu : la même grille, pour vous deux.</p>
+    </div>
+
+    <!-- Repli : quelqu'un est arrivé sur /d sans défi dans le lien. -->
+    <div id="without-challenge" class="hidden">
+      <h1>Duel<br><span class="accent">Tatakuzu</span></h1>
+      <p class="tagline">Ce lien ne contient aucun défi — il a sans doute été tronqué en chemin. Demande à ton ami de le renvoyer en entier.</p>
+    </div>
+
+    <div class="duel-motif" aria-hidden="true">
+      <span class="marble b"></span>
+      <span class="versus">VS</span>
+      <span class="marble w"></span>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://play.google.com/store/apps/details?id=com.mukeka.tatakuzu">
+        Installer Tatakuzu
+      </a>
+      <a class="btn btn-ghost hidden" id="open-in-app" href="#">Ouvrir dans l'app</a>
+    </div>
+
+    <div class="card">
+      <h2>Pourquoi cette page s'affiche</h2>
+      <p>Quand Tatakuzu est installé, ce lien s'ouvre <strong>directement dans le jeu</strong>. Tu vois cette page parce que l'app n'est pas encore là (ou que le navigateur a été choisi à sa place).</p>
+      <ol class="steps">
+        <li>Installe Tatakuzu depuis Google Play.</li>
+        <li>Reviens dans la conversation et <strong>rouvre le même lien</strong>.</li>
+        <li>La grille du duel s'ouvre, chrono compris.</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h2>Le défi n'est pas passé par nos serveurs</h2>
+      <p>Tout ce qui décrit le duel — pseudo, temps, score — voyage dans la partie du lien qui suit le <code>#</code>. Les navigateurs ne transmettent <strong>jamais</strong> cette partie au site : elle n'a pas quitté vos deux téléphones, et rien n'en est enregistré ici.</p>
+    </div>
+
+    <p class="note-en"><strong>English</strong> — A friend challenged you to a Tatakuzu duel. Install the app from Google Play, then reopen this link: the puzzle will open straight in the game.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="/">Tatakuzu</a>
+      <a href="https://play.google.com/store/apps/details?id=com.mukeka.tatakuzu">Google Play</a>
+      <a href="https://oulanbator.github.io/com.mukeka.tatakuzu/">Confidentialité</a>
+      <a href="mailto:mukeka.studio@gmail.com">Support</a>
+    </div>
+    <p class="studio">Mukeka Studio</p>
+    <p>© 2026 Mukeka Studio · Fait avec soin.</p>
+  </div>
+</footer>
+
+<script>
+  // Le fragment n'atteint jamais le serveur, mais le navigateur, lui, l'a :
+  // c'est la seule façon de distinguer « lien de défi complet » de « lien tronqué ».
+  (function () {
+    var hash = window.location.hash.replace(/^#/, '');
+    // Repli toléré par DuelCodec : certains outils de partage transforment le
+    // fragment en paramètre ?d=.
+    if (!hash) {
+      var m = window.location.search.match(/[?&]d=([^&]+)/);
+      if (m) hash = m[1];
+    }
+    if (hash) {
+      // Relancer la navigation vers la même URL laisse une chance à Android
+      // d'intercepter le lien si l'app a été installée entre-temps.
+      var open = document.getElementById('open-in-app');
+      open.href = window.location.href;
+      open.classList.remove('hidden');
+    } else {
+      document.getElementById('with-challenge').classList.add('hidden');
+      document.getElementById('without-challenge').classList.remove('hidden');
+    }
+  })();
+</script>
+</body>
+</html>
